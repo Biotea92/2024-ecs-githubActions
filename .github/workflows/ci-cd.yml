@@ -22,6 +22,11 @@ jobs:
           echo "${{ secrets.PROPERTIES_PRD }}" > ./application-prd.properties
         shell: bash
 
+      - name: Create task definition file from secret
+        run: |
+          touch ./springboot-app-task-definition.json
+          echo "${{ secrets.TASK_DEFINITION_JSON }}" > ./springboot-app-task-definition.json
+
       - name: Build Project
         run: mvn clean install -DskipTests
 
@@ -51,11 +56,6 @@ jobs:
             docker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
             echo "image=$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
-      - name: Create task definition file from secret
-        run: |
-          touch ./springboot-app-task-definition.json
-          echo "${{ secrets.TASK_DEFINITION_JSON }}" > ./springboot-app-task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
