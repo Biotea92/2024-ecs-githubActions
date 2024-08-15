@@ -19,6 +19,7 @@ jobs:
         run: |
           touch ./springboot-app-task-definition.json
           echo "${{ secrets.TASK_DEFINITION_JSON }}" > ./springboot-app-task-definition.json
+        shell: bash
 
       - name: Make application-prd.properties
         run: |
