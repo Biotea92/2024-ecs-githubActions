@@ -15,11 +15,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Create task definition file from secret
-        run: |
-          touch ./springboot-app-task-definition.json
-          echo "${{ secrets.TASK_DEFINITION_JSON }}" > ./springboot-app-task-definition.json
-        shell: bash
+#      - name: Create task definition file from secret
+#        run: |
+#          touch ./springboot-app-task-definition.json
+#          echo "${{ secrets.TASK_DEFINITION_JSON }}" > ./springboot-app-task-definition.json
+#        shell: bash
 
       - name: Make application-prd.properties
         run: |
